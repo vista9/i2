@@ -88,6 +88,10 @@ print(f"Группа: {students[best_student_id]['group']}")
 Выведите статистику для групп "ИТ-101" и "ИТ-102".
 """
 
+print()
+print('Статистика по группам:')
+
+print("– Количество студентов в каждой группе:")
 students_count = {}
 for student in students.items():
     if not student[1]['group'] in students_count:
@@ -95,10 +99,34 @@ for student in students.items():
     else:
         students_count[student[1]['group']] += 1
 
+for group_name, count in students_count.items():
+    print(f"– [{group_name}] {count} перс.")
+
 print()
-print("Количество студентов по группам:")
-for count in students_count.items():
-    print(f"– {count[0]}: {count[1]}")
+print("– Средний балл группы:")
+group_marks = {}
+for student in students.items():
+    if not student[1]['group'] in group_marks:
+        group_marks[student[1]['group']] = list(student[1]['grades'].values())
+    else:
+        for mark in student[1]['grades'].values():
+            group_marks[student[1]['group']].append(mark)
+
+for group_name, grades in group_marks.items():
+    mark = sum(grades) / len(grades)
+    print(f"– [{group_name}] {mark:.2f}")
+
+print()
+print("– Список студентов каждой группы:")
+group_students = {}
+for student in students.items():
+    if not student[1]['group'] in group_students:
+        group_students[student[1]['group']] = [student[1]['name']]
+    else:
+        group_students[student[1]['group']].append(student[1]['name'])
+
+for group_name, names in group_students.items():
+    print(f"– [{group_name}] {', '.join(names)}")
 
 """
 6
@@ -114,6 +142,7 @@ for student in students.items():
         name_hashes[student[0]] = new_hash
 
 print()
+print('Хэши имён студентов:')
 print(name_hashes)
 
 """
@@ -123,7 +152,6 @@ print(name_hashes)
 Всех студентов старше 20 лет
 """
 
-print()
 for student in students.items():
     if student[1]['grades']['programming'] == 5 and student[1]['age'] > 20:
         print(student[1]['name'])
