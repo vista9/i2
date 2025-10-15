@@ -9,9 +9,9 @@ class Book:
 
 # 2
 class Student:
-    def __init__(self, name, grades = []) -> None:
+    def __init__(self, name, grades = None) -> None:
         self.name = name
-        self.grades = grades
+        self.grades = grades if grades is not None else []
     
     def add_grade(self, grade):
         self.grades.append(grade)
@@ -84,15 +84,16 @@ class Lamp:
 
 # 8
 class SocialProfile:
-    def __init__(self, username, posts = []) -> None:
+    def __init__(self, username, posts = None) -> None:
         self.username = username
-        self.posts = posts
-    
+        self.posts = posts if posts is not None else []
+
     def add_post(self, text):
         self.posts.append(text)
     
     def show_posts(self):
-        print('\n'.join(self.posts))
+        for post in self.posts:
+            print(post)
 
 # 9
 class CoffeeMachine:
